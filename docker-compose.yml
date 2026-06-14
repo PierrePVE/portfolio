@@ -1,0 +1,13 @@
+# Portfolio — orchestration Docker.
+# Production : `docker compose up -d --build`.
+# Le portfolio est statique côté données : aucune base requise.
+services:
+  portfolio:
+    build: .
+    restart: unless-stopped
+    environment:
+      # URL de l'application Récurra liée depuis le portfolio.
+      # En reverse-proxy sur le même domaine, laissez « /recurra/ ».
+      NUXT_PUBLIC_RECURRA_URL: ${NUXT_PUBLIC_RECURRA_URL:-/recurra/}
+    ports:
+      - '3001:3000'
