@@ -1,4 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+// Base path is env-driven so the same codebase deploys to two targets:
+// - Freebox (behind a reverse proxy, apps split by URL segment): "/portfolio/"
+// - Vercel (dedicated domain, app served at the domain root): "/"
+// Set NUXT_APP_BASE_URL at build time to override; defaults to the Freebox path.
+// Evaluated here (not only via Nuxt's runtime env) because baseURL is baked into
+// client asset paths at build time and cannot be fixed at runtime.
+const baseURL = process.env.NUXT_APP_BASE_URL || '/portfolio/'
+
 export default defineNuxtConfig({
   compatibilityDate: '2026-06-01',
   devtools: { enabled: false },
@@ -7,8 +16,9 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  // Le portfolio est servi à la racine du domaine ; Récurra vit sous /recurra/.
-  // L'URL de l'app Récurra est surchargeable via NUXT_PUBLIC_RECURRA_URL.
+  // Link to the Récurra app. Default assumes same-domain reverse proxy;
+  // override with NUXT_PUBLIC_RECURRA_URL (e.g. the absolute DNS URL on Vercel,
+  // where /recurra/ does not exist).
   runtimeConfig: {
     public: {
       recurraUrl: '/recurra/',
@@ -24,10 +34,8 @@ export default defineNuxtConfig({
   },
 
   app: {
-    // Servi sous /portfolio/ : Pierre différencie ses apps par un segment d'URL
-    // derrière son DNS (ex. mondomaine.fr/portfolio/, mondomaine.fr/recurra/).
-    // Tous les liens et assets Nuxt sont automatiquement préfixés par ce baseURL.
-    baseURL: '/portfolio/',
+    // All Nuxt links/assets are automatically prefixed with this base path.
+    baseURL,
     head: {
       htmlAttrs: { lang: 'fr' },
       title: 'Pierre Van Elsuve — Développeur Full-Stack',
@@ -47,9 +55,9 @@ export default defineNuxtConfig({
         },
         { property: 'og:type', content: 'website' },
       ],
-      // href absolu incluant le baseURL (les liens du <head> ne sont pas
-      // préfixés automatiquement, contrairement aux assets ~/).
-      link: [{ rel: 'icon', type: 'image/svg+xml', href: '/portfolio/favicon.svg' }],
+      // <head> link hrefs are NOT auto-prefixed (unlike ~/ assets), so build the
+      // favicon URL from baseURL to keep it correct on both targets.
+      link: [{ rel: 'icon', type: 'image/svg+xml', href: `${baseURL}favicon.svg` }],
     },
   },
 })
