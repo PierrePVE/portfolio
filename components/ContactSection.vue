@@ -41,7 +41,7 @@ const reveal = {
           <p class="section-eyebrow justify-center"><span class="h-px w-8 bg-accent-300" /> Contact</p>
           <h2 class="section-title">Construisons quelque chose <span class="text-gradient">ensemble</span></h2>
           <p class="mx-auto mt-4 max-w-xl text-lg text-slate-400">
-            Une alternance, un projet ou simplement envie d'échanger ? Ma boîte mail est toujours ouverte.
+            Un stage, un projet ou simplement envie d'échanger ? Ma boîte mail est toujours ouverte.
           </p>
 
           <div class="mt-8 flex justify-center">

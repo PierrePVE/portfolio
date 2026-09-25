@@ -49,7 +49,7 @@ onMounted(() => {
 const stats = [
   { value: '3', label: 'stages en entreprise' },
   { value: '11,5', label: 'mois d\'expérience' },
-  { value: '2026', label: 'recherche alternance' },
+  { value: '2027', label: 'recherche de stage' },
 ]
 </script>
 
@@ -67,7 +67,7 @@ const stats = [
               <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
               <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
             </span>
-            Disponible — alternance dès septembre 2026
+            Disponible — stage à partir de février 2027
           </div>
 
           <h1 class="font-display text-5xl font-bold leading-[1.05] tracking-tight text-white sm:text-7xl">

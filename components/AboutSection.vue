@@ -5,7 +5,7 @@ const facts = [
   { icon: 'cap', label: 'Formation', value: 'Cycle ingénieur ESEO — Logiciels & Données' },
   { icon: 'pin', label: 'Localisation', value: 'France · ouvert à la mobilité' },
   { icon: 'globe', label: 'Langues', value: 'Français · Anglais (B1) · Espagnol (A2)' },
-  { icon: 'spark', label: 'Recherche', value: 'Alternance / contrat pro — sept. 2026' },
+  { icon: 'spark', label: 'Recherche', value: 'Stage — à partir de février 2027' },
 ]
 
 // Variante @vueuse/motion réutilisée : invisible et décalé vers le bas au
@@ -38,7 +38,7 @@ const reveal = {
           <p>
             J'aime autant <span class="text-slate-200">le détail d'une interface</span> que la
             <span class="text-slate-200">solidité d'un back-end</span> bien pensé. Curieux et rigoureux,
-            je cherche à intégrer une entreprise en alternance dès septembre 2026 pour mettre tout ça en pratique.
+            je recherche un stage à partir de février 2027 pour mettre tout ça en pratique.
           </p>
 
           <div class="grid gap-4 pt-4 sm:grid-cols-2">
