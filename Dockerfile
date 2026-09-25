@@ -10,6 +10,9 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
+# Freebox target is served under /portfolio/ behind the reverse proxy. baseURL is
+# baked at build time, so it must be set here (Vercel defaults to root "/" instead).
+ENV NUXT_APP_BASE_URL=/portfolio/
 RUN npm run build
 
 # ---- Étape 2 : runtime ----

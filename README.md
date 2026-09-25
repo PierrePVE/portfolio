@@ -40,10 +40,10 @@ tombe, Vercel reste en ligne) :
 Le chemin de base et le lien vers Récurra sont pilotés par variables (aucune
 valeur en dur). Voir [`.env.example`](.env.example).
 
-| Variable                 | Freebox                              | Vercel                                 |
-| ------------------------ | ------------------------------------ | -------------------------------------- |
-| `NUXT_APP_BASE_URL`      | `/portfolio/` (défaut)               | `/`                                    |
-| `NUXT_PUBLIC_RECURRA_URL`| `/recurra/` ou l'URL absolue         | `https://pierrepve.ddns.net/recurra`   |
+| Variable                 | Vercel (défaut)                        | Freebox                        |
+| ------------------------ | -------------------------------------- | ------------------------------ |
+| `NUXT_APP_BASE_URL`      | `/` (rien à définir)                   | `/portfolio/` (via Dockerfile) |
+| `NUXT_PUBLIC_RECURRA_URL`| `https://recurra-smoky.vercel.app`     | `/recurra/` ou l'URL absolue   |
 
 ## Déploiement Docker (Freebox / serveur)
 
@@ -56,10 +56,10 @@ docker compose up -d --build
 Le portfolio écoute alors sur le port **3001** de l'hôte (modifiable dans
 `docker-compose.yml`).
 
-> Le site est servi sous le chemin **`/portfolio/`** : c'est la valeur par
-> défaut de `NUXT_APP_BASE_URL` (cf. `nuxt.config.ts`), donc rien à définir
-> côté Docker. Derrière le DNS, chaque app a son segment d'URL
-> (`/portfolio/`, `/recurra/`, …).
+> Le site est servi sous le chemin **`/portfolio/`** : le `Dockerfile` définit
+> `NUXT_APP_BASE_URL=/portfolio/` au build (le défaut du projet est la racine
+> `/`). Derrière le DNS, chaque app a son segment d'URL (`/portfolio/`,
+> `/recurra/`, …).
 
 ### Lien vers Récurra
 
@@ -86,28 +86,31 @@ exemple :
 NUXT_PUBLIC_RECURRA_URL=https://recurra.mondomaine.fr docker compose up -d --build
 ```
 
-## Déploiement Vercel (miroir gratuit)
+## Déploiement Vercel (site statique)
 
-Nuxt est détecté automatiquement par Vercel (preset Nitro `vercel`, build
-`nuxt build`) — aucun `vercel.json` requis.
+Le portfolio n'a besoin d'aucun serveur : il est **généré en statique**
+(`nuxt generate`) et servi comme de simples fichiers. Le [`vercel.json`](vercel.json)
+fige ce comportement (build `nuxt generate`, sortie `.output/public`, pas de
+preset serveur) — c'est **déterministe** et ça évite les soucis de routage des
+fichiers `_nuxt` rencontrés avec le mode SSR.
 
 1. **Importer le dépôt** : sur [vercel.com](https://vercel.com) → *Add New…* →
-   *Project* → sélectionner le repo GitHub `portfolio2`. Framework détecté :
-   *Nuxt.js*. Laisser les commandes par défaut.
-2. **Définir les variables d'environnement** (onglet *Settings → Environment
-   Variables*, pour *Production* et *Preview*) :
+   *Project* → sélectionner le repo GitHub `portfolio2`. Ne pas surcharger les
+   *Build & Output Settings* : `vercel.json` s'en charge.
+2. **Variable d'environnement** (onglet *Settings → Environment Variables*,
+   *Production* et *Preview*) — une seule est utile :
 
-   | Nom                       | Valeur                                 |
-   | ------------------------- | -------------------------------------- |
-   | `NUXT_APP_BASE_URL`       | `/`                                    |
-   | `NUXT_PUBLIC_RECURRA_URL` | `https://pierrepve.ddns.net/recurra`   |
+   | Nom                       | Valeur                              |
+   | ------------------------- | ----------------------------------- |
+   | `NUXT_PUBLIC_RECURRA_URL` | `https://recurra-smoky.vercel.app`  |
 
-3. **Deploy**. Chaque `git push` sur `main` redéploie automatiquement.
+   `NUXT_APP_BASE_URL` n'est **pas** nécessaire : la racine `/` est le défaut.
 
-> Important : sans `NUXT_APP_BASE_URL=/`, le site sortirait sous
-> `/portfolio/` sur le domaine Vercel (défaut Freebox) et les assets
-> seraient introuvables à la racine. Cette variable est donc indispensable
-> côté Vercel.
+3. **Deploy** (au premier déploiement, coche *Clear build cache* si un ancien
+   build SSR traînait). Chaque `git push` sur `main` redéploie automatiquement.
+
+> Le lien vers Récurra est figé au build depuis `NUXT_PUBLIC_RECURRA_URL` : si tu
+> changes l'URL de Récurra, redéploie le portfolio pour la prendre en compte.
 
 ## Structure
 

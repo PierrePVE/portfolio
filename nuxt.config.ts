@@ -1,12 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 // Base path is env-driven so the same codebase deploys to two targets:
-// - Freebox (behind a reverse proxy, apps split by URL segment): "/portfolio/"
-// - Vercel (dedicated domain, app served at the domain root): "/"
-// Set NUXT_APP_BASE_URL at build time to override; defaults to the Freebox path.
-// Evaluated here (not only via Nuxt's runtime env) because baseURL is baked into
-// client asset paths at build time and cannot be fixed at runtime.
-const baseURL = process.env.NUXT_APP_BASE_URL || '/portfolio/'
+// - Vercel (dedicated *.vercel.app domain, served at the root): "/" — the default
+// - Freebox (reverse proxy, apps split by URL segment): set NUXT_APP_BASE_URL=/portfolio/
+// Root is the default so the hosted case needs zero config; only the sub-path
+// deployment sets the env var (done in the Dockerfile). Evaluated here (not only
+// via Nuxt's runtime env) because baseURL is baked into client asset paths at
+// build time and cannot be fixed at runtime.
+const baseURL = process.env.NUXT_APP_BASE_URL || '/'
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-06-01',
