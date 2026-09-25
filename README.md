@@ -37,13 +37,14 @@ tombe, Vercel reste en ligne) :
 
 ### Variables d'environnement
 
-Le chemin de base et le lien vers Récurra sont pilotés par variables (aucune
+Le chemin de base et les liens vers Récurra et Revu sont pilotés par variables (aucune
 valeur en dur). Voir [`.env.example`](.env.example).
 
 | Variable                 | Vercel (défaut)                        | Freebox                        |
 | ------------------------ | -------------------------------------- | ------------------------------ |
 | `NUXT_APP_BASE_URL`      | `/` (rien à définir)                   | `/portfolio/` (via Dockerfile) |
 | `NUXT_PUBLIC_RECURRA_URL`| `https://recurra-smoky.vercel.app`     | `/recurra/` ou l'URL absolue   |
+| `NUXT_PUBLIC_REVU_URL`   | `https://revu-pink.vercel.app` (défaut)| idem (défaut)                  |
 
 ## Déploiement Docker (Freebox / serveur)
 

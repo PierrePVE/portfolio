@@ -20,9 +20,12 @@ export default defineNuxtConfig({
   // Link to the Récurra app. Default assumes same-domain reverse proxy;
   // override with NUXT_PUBLIC_RECURRA_URL (e.g. the absolute DNS URL on Vercel,
   // where /recurra/ does not exist).
+  // Revu is only hosted on Vercel, so its absolute URL is the default;
+  // override with NUXT_PUBLIC_REVU_URL if it moves.
   runtimeConfig: {
     public: {
       recurraUrl: '/recurra/',
+      revuUrl: 'https://revu-pink.vercel.app',
     },
   },
 

@@ -1,9 +1,11 @@
 <script setup lang="ts">
-// Section projets : Récurra en « projet phare » (lien vers l'app en ligne),
-// suivi d'une grille de projets secondaires avec effet d'inclinaison 3D.
+// Section projets : Récurra et Revu en « projets phares » (liens vers les apps
+// en ligne), suivis d'une grille de projets secondaires avec effet d'inclinaison 3D.
 const config = useRuntimeConfig()
 // URL de l'app Récurra liée par le bouton « Ouvrir l'application ».
 const recurraUrl = config.public.recurraUrl
+// URL de l'app Revu (configurable via NUXT_PUBLIC_REVU_URL).
+const revuUrl = config.public.revuUrl
 
 const projects = [
   {
@@ -115,6 +117,74 @@ function resetTilt(e: MouseEvent) {
                   <div class="rounded-lg bg-white/5 p-2"><div class="h-1.5 w-8 rounded bg-white/15" /><div class="mt-1.5 h-3 w-10 rounded bg-white/25" /></div>
                   <div class="rounded-lg bg-white/5 p-2"><div class="h-1.5 w-8 rounded bg-white/15" /><div class="mt-1.5 h-3 w-10 rounded bg-white/25" /></div>
                   <div class="rounded-lg bg-white/5 p-2"><div class="h-1.5 w-8 rounded bg-white/15" /><div class="mt-1.5 h-3 w-10 rounded bg-white/25" /></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Projet phare : Revu -->
+      <div
+        v-motion="reveal"
+        class="group relative mt-6 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-ink-800 to-ink-950 p-8 sm:p-10"
+      >
+        <div class="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-emerald-500/15 blur-3xl transition-all duration-700 group-hover:bg-glow-cyan/25" />
+        <!-- Colonnes inversées sur desktop pour alterner avec la carte Récurra. -->
+        <div class="relative grid gap-8 lg:grid-cols-[1fr_1.3fr] lg:items-center">
+          <div class="lg:order-2">
+            <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-accent-300">
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400" /> SaaS · en ligne
+            </div>
+            <h3 class="font-display text-3xl font-bold text-white sm:text-4xl">Revu</h3>
+            <p class="mt-3 max-w-lg text-lg leading-relaxed text-slate-400">
+              SaaS de collecte d'avis pour les commerces de proximité : le client scanne un QR code
+              et note sa visite en quelques secondes, sans application. Le commerçant suit la moyenne
+              des notes, l'analyse des commentaires et reçoit une alerte quand un problème revient.
+            </p>
+            <ul class="mt-5 flex flex-wrap gap-2">
+              <li v-for="t in ['Nuxt', 'Vue', 'Tailwind CSS', 'QR codes', 'Vercel']" :key="t" class="rounded-lg border border-white/10 bg-white/5 px-3 py-1 text-sm text-slate-300">{{ t }}</li>
+            </ul>
+            <div class="mt-7 flex flex-wrap gap-3">
+              <a :href="revuUrl" class="btn-primary">
+                Ouvrir l'application
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Aperçu stylisé : note moyenne, répartition des notes et alerte -->
+          <div class="relative lg:order-1">
+            <div class="gradient-border glass overflow-hidden p-4">
+              <div class="flex items-center gap-1.5 pb-3">
+                <span class="h-2.5 w-2.5 rounded-full bg-glow-pink/70" />
+                <span class="h-2.5 w-2.5 rounded-full bg-amber-400/70" />
+                <span class="h-2.5 w-2.5 rounded-full bg-emerald-400/70" />
+              </div>
+              <div class="space-y-3 rounded-xl bg-ink-950/60 p-4">
+                <div class="flex items-center justify-between gap-3">
+                  <div>
+                    <div class="h-2 w-16 rounded bg-white/10" />
+                    <div class="mt-2 flex items-baseline gap-2">
+                      <span class="font-display text-2xl font-bold text-white">4,6</span>
+                      <span class="text-sm tracking-widest text-amber-400">★★★★★</span>
+                    </div>
+                  </div>
+                  <!-- Mini QR code décoratif (cases pleines choisies à la main) -->
+                  <div class="grid grid-cols-5 gap-0.5 rounded-md bg-white/10 p-1.5">
+                    <span v-for="n in 25" :key="n" class="h-1.5 w-1.5 rounded-[1px]" :class="[1, 2, 3, 5, 6, 8, 11, 13, 15, 17, 19, 21, 22, 23, 25].includes(n) ? 'bg-white/70' : 'bg-transparent'" />
+                  </div>
+                </div>
+                <!-- Répartition des notes, de 5 à 1 étoile -->
+                <div class="space-y-1.5">
+                  <div v-for="w in [82, 45, 18, 8, 4]" :key="w" class="h-1.5 rounded bg-white/5">
+                    <div class="h-full rounded bg-emerald-400/70" :style="{ width: w + '%' }" />
+                  </div>
+                </div>
+                <!-- Alerte « problème récurrent » -->
+                <div class="flex items-center gap-2 rounded-lg border border-glow-pink/30 bg-glow-pink/10 px-3 py-2">
+                  <span class="h-1.5 w-1.5 rounded-full bg-glow-pink" />
+                  <div class="h-2 w-32 rounded bg-white/20" />
                 </div>
               </div>
             </div>
