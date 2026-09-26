@@ -10,7 +10,16 @@ const year = new Date().getFullYear()
         <span class="text-sm text-slate-400">Pierre Van Elsuve</span>
       </div>
       <p class="text-sm text-slate-500">© {{ year }} — Conçu &amp; développé avec Nuxt.</p>
-      <a href="#top" class="text-sm text-slate-400 transition-colors hover:text-white">Haut de page ↑</a>
+      <div class="flex items-center gap-5">
+        <a
+          href="https://github.com/PierrePVE"
+          target="_blank"
+          rel="noopener"
+          class="text-sm text-slate-400 transition-colors hover:text-white"
+          >GitHub ↗</a
+        >
+        <a href="#top" class="text-sm text-slate-400 transition-colors hover:text-white">Haut de page ↑</a>
+      </div>
     </div>
   </footer>
 </template>
