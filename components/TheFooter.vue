@@ -1,5 +1,8 @@
 <script setup lang="ts">
 const year = new Date().getFullYear()
+
+// Translated copy (see locales/*.ts).
+const { t } = useLocale()
 </script>
 
 <template>
@@ -9,7 +12,7 @@ const year = new Date().getFullYear()
         <span class="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-glow-violet to-glow-cyan font-display text-xs font-bold text-ink-950">PV</span>
         <span class="text-sm text-slate-400">Pierre Van Elsuve</span>
       </div>
-      <p class="text-sm text-slate-500">© {{ year }} — Conçu &amp; développé avec Nuxt.</p>
+      <p class="text-sm text-slate-500">© {{ year }} — {{ t.footer.credits }}</p>
       <div class="flex items-center gap-5">
         <a
           href="https://github.com/PierrePVE"
@@ -18,7 +21,7 @@ const year = new Date().getFullYear()
           class="text-sm text-slate-400 transition-colors hover:text-white"
           >GitHub ↗</a
         >
-        <a href="#top" class="text-sm text-slate-400 transition-colors hover:text-white">Haut de page ↑</a>
+        <a href="#top" class="text-sm text-slate-400 transition-colors hover:text-white">{{ t.footer.backToTop }}</a>
       </div>
     </div>
   </footer>

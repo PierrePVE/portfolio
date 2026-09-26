@@ -7,6 +7,9 @@ import { gsap } from 'gsap'
 const config = useRuntimeConfig()
 const recurraUrl = config.public.recurraUrl
 
+// Translated copy (see locales/*.ts).
+const { t } = useLocale()
+
 // Racine de la section : sert de portée à gsap.context (sélecteurs limités à
 // cet élément, et nettoyage automatique via ctx.revert()).
 const root = ref<HTMLElement | null>(null)
@@ -45,12 +48,6 @@ onMounted(() => {
     ctx.revert()
   })
 })
-
-const stats = [
-  { value: '3', label: 'stages en entreprise' },
-  { value: '11,5', label: 'mois d\'expérience' },
-  { value: '2027', label: 'recherche de stage' },
-]
 </script>
 
 <template>
@@ -67,7 +64,7 @@ const stats = [
               <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
               <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
             </span>
-            Disponible — stage à partir de février 2027
+            {{ t.hero.availability }}
           </div>
 
           <h1 class="font-display text-5xl font-bold leading-[1.05] tracking-tight text-white sm:text-7xl">
@@ -77,25 +74,26 @@ const stats = [
             >
           </h1>
 
-          <p data-hero="fade" class="mt-6 max-w-xl text-balance text-lg leading-relaxed text-slate-400">
-            Étudiant <span class="text-slate-200">ingénieur à l'ESEO</span>, spécialisé logiciels &amp; données.
-            Je conçois des applications web <span class="text-slate-200">full-stack</span>, du front soigné
-            jusqu'au back robuste et déployé.
-          </p>
+          <!-- v-html: static, trusted copy from locales/*.ts (<b> = highlight). -->
+          <p
+            data-hero="fade"
+            class="rich mt-6 max-w-xl text-balance text-lg leading-relaxed text-slate-400"
+            v-html="t.hero.intro"
+          />
 
           <div data-hero="fade" class="mt-9 flex flex-wrap items-center gap-3">
             <a :href="recurraUrl" class="btn-primary">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
-              Découvrir Récurra
+              {{ t.hero.primaryCta }}
             </a>
-            <a href="#projects" class="btn-ghost">Voir mes projets</a>
+            <a href="#projects" class="btn-ghost">{{ t.hero.secondaryCta }}</a>
           </div>
 
           <!-- Stats -->
           <dl data-hero="fade" class="mt-12 grid max-w-md grid-cols-3 gap-6">
-            <div v-for="s in stats" :key="s.label">
+            <div v-for="s in t.hero.stats" :key="s.value">
               <dt class="font-display text-3xl font-bold text-white">{{ s.value }}</dt>
               <dd class="mt-1 text-xs leading-snug text-slate-500">{{ s.label }}</dd>
             </div>
@@ -114,7 +112,7 @@ const stats = [
                 <!-- Contenu de la carte -->
                 <div class="absolute inset-x-0 bottom-0 p-6">
                   <p class="font-display text-sm font-semibold uppercase tracking-widest text-accent-300">
-                    Développeur Full-Stack
+                    {{ t.hero.cardRole }}
                   </p>
                   <p class="mt-2 text-sm text-slate-400">
                     Vue · Nuxt · React · Spring · Express · Docker

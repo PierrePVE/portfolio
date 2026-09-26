@@ -2,14 +2,9 @@
 // En-tête fixe « verre dépoli » avec navigation par ancres et smooth-scroll.
 // Le fond ne devient opaque qu'une fois la page défilée (effet flottant en haut).
 
-// Liens de navigation -> ancres des <section id="..."> de la page.
-const links = [
-  { label: 'À propos', href: '#about' },
-  { label: 'Compétences', href: '#skills' },
-  { label: 'Parcours', href: '#experience' },
-  { label: 'Projets', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
-]
+// Translated copy + language switch. Nav links (labels + section anchors)
+// come from the locale dictionary.
+const { t, toggleLocale } = useLocale()
 
 // scrolled : la barre a-t-elle quitté le haut ? (déclenche le style glass)
 const scrolled = ref(false)
@@ -61,7 +56,7 @@ function go(href: string) {
         </a>
 
         <ul class="hidden items-center gap-1 md:flex">
-          <li v-for="l in links" :key="l.href">
+          <li v-for="l in t.header.links" :key="l.href">
             <a
               :href="l.href"
               class="rounded-full px-3.5 py-2 text-sm text-slate-300 transition-colors hover:bg-white/5 hover:text-white"
@@ -72,12 +67,22 @@ function go(href: string) {
         </ul>
 
         <div class="flex items-center gap-2">
+          <!-- Language switch: shows the language it switches to (FR / EN). -->
+          <button
+            type="button"
+            class="grid h-10 min-w-10 place-items-center rounded-full border border-white/10 px-3 font-display text-xs font-semibold tracking-wider text-slate-300 transition-colors hover:border-white/30 hover:text-white"
+            :aria-label="t.header.switchAria"
+            :title="t.header.switchAria"
+            @click="toggleLocale"
+          >
+            {{ t.header.switchLabel }}
+          </button>
           <a href="#contact" class="hidden btn-primary !px-5 !py-2 text-sm sm:inline-flex" @click.prevent="go('#contact')">
-            Me contacter
+            {{ t.header.cta }}
           </a>
           <button
             class="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-white md:hidden"
-            aria-label="Menu"
+            :aria-label="t.header.menu"
             @click="menuOpen = !menuOpen"
           >
             <svg v-if="!menuOpen" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -99,7 +104,7 @@ function go(href: string) {
       >
         <div v-if="menuOpen" class="glass mt-2 overflow-hidden p-2 md:hidden">
           <a
-            v-for="l in links"
+            v-for="l in t.header.links"
             :key="l.href"
             :href="l.href"
             class="block rounded-xl px-4 py-3 text-slate-200 transition-colors hover:bg-white/5"

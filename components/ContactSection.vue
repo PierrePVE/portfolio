@@ -1,7 +1,12 @@
 <script setup lang="ts">
 // Section contact : CTA email principal + cartes email / LinkedIn / GitHub / téléphone.
 const email = 'pierre.vanelsuve@gmail.com'
-const channels = [
+
+// Translated copy (see locales/*.ts).
+const { t } = useLocale()
+
+// Computed so the phone label follows the selected language.
+const channels = computed(() => [
   {
     label: 'Email',
     value: email,
@@ -21,12 +26,12 @@ const channels = [
     icon: 'github',
   },
   {
-    label: 'Téléphone',
+    label: t.value.contact.phone,
     value: '+33 6 09 08 79 26',
     href: 'tel:+33609087926',
     icon: 'phone',
   },
-]
+])
 
 // Variante de révélation au scroll (cf. AboutSection pour le détail).
 const reveal = {
@@ -44,10 +49,10 @@ const reveal = {
       >
         <div class="pointer-events-none absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-accent-500/20 blur-3xl" />
         <div class="relative">
-          <p class="section-eyebrow justify-center"><span class="h-px w-8 bg-accent-300" /> Contact</p>
-          <h2 class="section-title">Construisons quelque chose <span class="text-gradient">ensemble</span></h2>
+          <p class="section-eyebrow justify-center"><span class="h-px w-8 bg-accent-300" /> {{ t.contact.eyebrow }}</p>
+          <h2 class="section-title">{{ t.contact.title.before }}<span class="text-gradient">{{ t.contact.title.highlight }}</span>{{ t.contact.title.after }}</h2>
           <p class="mx-auto mt-4 max-w-xl text-lg text-slate-400">
-            Un stage, un projet ou simplement envie d'échanger ? Ma boîte mail est toujours ouverte.
+            {{ t.contact.subtitle }}
           </p>
 
           <div class="mt-8 flex justify-center">
@@ -61,7 +66,7 @@ const reveal = {
             <!-- External profiles (https) open in a new tab; mailto/tel links stay in place. -->
             <a
               v-for="c in channels"
-              :key="c.label"
+              :key="c.icon"
               :href="c.href"
               :target="c.href.startsWith('https://') ? '_blank' : undefined"
               rel="noopener"

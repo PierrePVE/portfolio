@@ -1,28 +1,8 @@
 <script setup lang="ts">
 // Section compétences : 4 groupes thématiques en cartes + bandeau défilant.
 // Chaque groupe = un domaine, avec son icône et la liste des technos.
-const groups = [
-  {
-    title: 'Frontend',
-    icon: 'layout',
-    items: ['Vue / Nuxt', 'React', 'Tailwind CSS', 'Bootstrap', 'HTML / CSS', 'JavaScript'],
-  },
-  {
-    title: 'Backend',
-    icon: 'server',
-    items: ['Express.js', 'Spring', 'Node.js', 'API REST', 'SQL', 'Java'],
-  },
-  {
-    title: 'Outils & DevOps',
-    icon: 'box',
-    items: ['Docker', 'Git', 'CI / CD', 'Linux', 'Postgres'],
-  },
-  {
-    title: 'Tests & Qualité',
-    icon: 'check',
-    items: ['Jest', 'Playwright', 'TypeScript', 'Méthode Agile'],
-  },
-]
+// Groups are translated (locales/*.ts); the marquee below is language-neutral.
+const { t } = useLocale()
 
 // Bandeau défilant — duplication de la liste pour une boucle continue.
 const marquee = [
@@ -41,18 +21,18 @@ const reveal = {
   <section id="skills" class="relative scroll-mt-24 py-28">
     <div class="mx-auto max-w-6xl px-5">
       <div v-motion="reveal" class="mx-auto max-w-2xl text-center">
-        <p class="section-eyebrow justify-center"><span class="h-px w-8 bg-accent-300" /> Compétences</p>
-        <h2 class="section-title">Une stack <span class="text-gradient">full-stack</span> complète</h2>
+        <p class="section-eyebrow justify-center"><span class="h-px w-8 bg-accent-300" /> {{ t.skills.eyebrow }}</p>
+        <h2 class="section-title">{{ t.skills.title.before }}<span class="text-gradient">{{ t.skills.title.highlight }}</span>{{ t.skills.title.after }}</h2>
         <p class="mt-4 text-lg text-slate-400">
-          Du pixel à la production : interfaces soignées, APIs robustes et déploiement conteneurisé.
+          {{ t.skills.subtitle }}
         </p>
       </div>
 
       <!-- Grille des groupes -->
       <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         <div
-          v-for="(g, i) in groups"
-          :key="g.title"
+          v-for="(g, i) in t.skills.groups"
+          :key="g.icon"
           v-motion="{ initial: { opacity: 0, y: 40 }, visibleOnce: { opacity: 1, y: 0, transition: { duration: 600, delay: i * 100 } } }"
           class="glass group p-6 transition-colors duration-300 hover:border-accent-500/40"
         >

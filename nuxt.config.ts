@@ -40,23 +40,15 @@ export default defineNuxtConfig({
   app: {
     // All Nuxt links/assets are automatically prefixed with this base path.
     baseURL,
+    // Language-dependent tags (html lang, title, description, og:title,
+    // og:description) are set reactively in app.vue from locales/*.ts;
+    // only language-neutral tags live here. The site defaults to English.
     head: {
-      htmlAttrs: { lang: 'fr' },
-      title: 'Pierre Van Elsuve — Développeur Full-Stack',
+      htmlAttrs: { lang: 'en' },
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        {
-          name: 'description',
-          content:
-            'Pierre Van Elsuve — Étudiant ingénieur ESEO et développeur full-stack. Portfolio, projets et expériences.',
-        },
         { name: 'theme-color', content: '#0a0a0f' },
-        { property: 'og:title', content: 'Pierre Van Elsuve — Développeur Full-Stack' },
-        {
-          property: 'og:description',
-          content: 'Étudiant ingénieur ESEO, développeur full-stack. Projets, expériences et contact.',
-        },
         { property: 'og:type', content: 'website' },
       ],
       // <head> link hrefs are NOT auto-prefixed (unlike ~/ assets), so build the

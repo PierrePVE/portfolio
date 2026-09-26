@@ -113,10 +113,21 @@ fichiers `_nuxt` rencontrés avec le mode SSR.
 > Le lien vers Récurra est figé au build depuis `NUXT_PUBLIC_RECURRA_URL` : si tu
 > changes l'URL de Récurra, redéploie le portfolio pour la prendre en compte.
 
+## Langues
+
+Le site est **en anglais par défaut** ; le bouton `FR` / `EN` de l'en-tête bascule
+vers le français (choix mémorisé dans le `localStorage`). Tous les textes sont dans
+`locales/fr.ts` et `locales/en.ts` : ajouter une clé côté FR impose de l'ajouter
+côté EN (vérifié par TypeScript).
+
 ## Structure
 
 ```
-app.vue                 # Assemble les sections + fond aurora
+app.vue                 # Assemble les sections + fond aurora, <head> selon la langue
+composables/useLocale.ts # Langue courante (EN par défaut), bascule, mémorisation
+locales/
+  fr.ts                 # Textes FR (source de la structure des messages)
+  en.ts                 # Textes EN (typés sur fr.ts)
 components/
   AuroraBackground.vue  # Fond animé (taches floutées + grille)
   TheHeader.vue         # Nav verre dépoli, smooth-scroll
@@ -125,7 +136,7 @@ components/
   SkillsSection.vue     # Compétences + bandeau défilant
   ExperienceSection.vue # Timeline stages + formation
   ProjectsSection.vue   # Récurra (phare) + autres projets
-  ContactSection.vue    # Email, LinkedIn, téléphone
+  ContactSection.vue    # Email, LinkedIn, GitHub, téléphone
   TheFooter.vue
 assets/css/main.css     # Tailwind + composants (glass, boutons, dégradés)
 tailwind.config.ts      # Couleurs, animations (aurora, marquee, float)

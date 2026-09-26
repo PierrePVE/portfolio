@@ -7,31 +7,17 @@ const recurraUrl = config.public.recurraUrl
 // URL de l'app Revu (configurable via NUXT_PUBLIC_REVU_URL).
 const revuUrl = config.public.revuUrl
 
-const projects = [
-  {
-    name: 'Gestion de club de basket',
-    blurb: "Application web de gestion d'un club : effectifs, plannings et suivi.",
-    stack: ['HTML', 'CSS', 'JavaScript'],
-    accent: 'from-glow-cyan/20 to-transparent',
-  },
-  {
-    name: 'Jeu de bataille navale',
-    blurb: 'Jeu en ligne de commande développé en C, logique de grille et IA simple.',
-    stack: ['Langage C'],
-    accent: 'from-glow-pink/20 to-transparent',
-  },
-  {
-    name: 'Jeu du dinosaure',
-    blurb: 'Recréation du jeu du T-Rex en Python, gestion des collisions et du score.',
-    stack: ['Python'],
-    accent: 'from-accent-500/20 to-transparent',
-  },
-  {
-    name: 'Éthylomètre & Radar de recul',
-    blurb: 'Projets électroniques embarqués : mesure et signalisation temps réel.',
-    stack: ['STM32', 'Arduino', 'Analogique'],
-    accent: 'from-glow-violet/20 to-transparent',
-  },
+// Translated copy (see locales/*.ts).
+const { t } = useLocale()
+
+// Hover gradient of each secondary project card, matched by index to
+// t.projects.others. Kept here rather than in the locale files so Tailwind
+// (which does not scan locales/) still generates these classes.
+const accents = [
+  'from-glow-cyan/20 to-transparent',
+  'from-glow-pink/20 to-transparent',
+  'from-accent-500/20 to-transparent',
+  'from-glow-violet/20 to-transparent',
 ]
 
 const reveal = {
@@ -60,8 +46,8 @@ function resetTilt(e: MouseEvent) {
   <section id="projects" class="relative scroll-mt-24 py-28">
     <div class="mx-auto max-w-6xl px-5">
       <div v-motion="reveal" class="max-w-2xl">
-        <p class="section-eyebrow"><span class="h-px w-8 bg-accent-300" /> Projets</p>
-        <h2 class="section-title">Ce que je <span class="text-gradient">construis</span></h2>
+        <p class="section-eyebrow"><span class="h-px w-8 bg-accent-300" /> {{ t.projects.eyebrow }}</p>
+        <h2 class="section-title">{{ t.projects.title.before }}<span class="text-gradient">{{ t.projects.title.highlight }}</span>{{ t.projects.title.after }}</h2>
       </div>
 
       <!-- Projet phare : Récurra -->
@@ -73,19 +59,18 @@ function resetTilt(e: MouseEvent) {
         <div class="relative grid gap-8 lg:grid-cols-[1.3fr_1fr] lg:items-center">
           <div>
             <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-accent-300">
-              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400" /> Projet phare · en ligne
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400" /> {{ t.projects.recurra.badge }}
             </div>
             <h3 class="font-display text-3xl font-bold text-white sm:text-4xl">Récurra</h3>
             <p class="mt-3 max-w-lg text-lg leading-relaxed text-slate-400">
-              Application de suivi d'abonnements personnels : synthèse des dépenses, répartition par
-              catégorie et évolution dans le temps. Pensée, développée et déployée de bout en bout.
+              {{ t.projects.recurra.description }}
             </p>
             <ul class="mt-5 flex flex-wrap gap-2">
               <li v-for="t in ['Nuxt 3', 'Vue', 'Prisma', 'PostgreSQL', 'Docker', 'ApexCharts']" :key="t" class="rounded-lg border border-white/10 bg-white/5 px-3 py-1 text-sm text-slate-300">{{ t }}</li>
             </ul>
             <div class="mt-7 flex flex-wrap gap-3">
               <a :href="recurraUrl" class="btn-primary">
-                Ouvrir l'application
+                {{ t.projects.openApp }}
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </a>
             </div>
@@ -134,20 +119,18 @@ function resetTilt(e: MouseEvent) {
         <div class="relative grid gap-8 lg:grid-cols-[1fr_1.3fr] lg:items-center">
           <div class="lg:order-2">
             <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-accent-300">
-              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400" /> SaaS · en ligne
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400" /> {{ t.projects.revu.badge }}
             </div>
             <h3 class="font-display text-3xl font-bold text-white sm:text-4xl">Revu</h3>
             <p class="mt-3 max-w-lg text-lg leading-relaxed text-slate-400">
-              SaaS de collecte d'avis pour les commerces de proximité : le client scanne un QR code
-              et note sa visite en quelques secondes, sans application. Le commerçant suit la moyenne
-              des notes, l'analyse des commentaires et reçoit une alerte quand un problème revient.
+              {{ t.projects.revu.description }}
             </p>
             <ul class="mt-5 flex flex-wrap gap-2">
               <li v-for="t in ['Nuxt', 'Vue', 'Tailwind CSS', 'QR codes', 'Vercel']" :key="t" class="rounded-lg border border-white/10 bg-white/5 px-3 py-1 text-sm text-slate-300">{{ t }}</li>
             </ul>
             <div class="mt-7 flex flex-wrap gap-3">
               <a :href="revuUrl" class="btn-primary">
-                Ouvrir l'application
+                {{ t.projects.openApp }}
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </a>
             </div>
@@ -166,7 +149,7 @@ function resetTilt(e: MouseEvent) {
                   <div>
                     <div class="h-2 w-16 rounded bg-white/10" />
                     <div class="mt-2 flex items-baseline gap-2">
-                      <span class="font-display text-2xl font-bold text-white">4,6</span>
+                      <span class="font-display text-2xl font-bold text-white">{{ t.projects.revu.rating }}</span>
                       <span class="text-sm tracking-widest text-amber-400">★★★★★</span>
                     </div>
                   </div>
@@ -195,15 +178,15 @@ function resetTilt(e: MouseEvent) {
       <!-- Autres projets -->
       <div class="perspective mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         <article
-          v-for="(p, i) in projects"
-          :key="p.name"
+          v-for="(p, i) in t.projects.others"
+          :key="i"
           v-motion="{ initial: { opacity: 0, y: 40 }, visibleOnce: { opacity: 1, y: 0, transition: { duration: 600, delay: i * 90 } } }"
           class="glass group relative overflow-hidden p-6 transition-[transform,border-color] duration-300 will-change-transform hover:border-accent-500/40"
           style="transform-style: preserve-3d"
           @mousemove="onTilt"
           @mouseleave="resetTilt"
         >
-          <div class="pointer-events-none absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-300 group-hover:opacity-100" :class="p.accent" />
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-300 group-hover:opacity-100" :class="accents[i]" />
           <div class="relative">
             <span class="grid h-10 w-10 place-items-center rounded-xl bg-white/5 text-accent-300">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 9l-3 3 3 3M16 9l3 3-3 3M14 5l-4 14" stroke-linecap="round" stroke-linejoin="round"/></svg>
