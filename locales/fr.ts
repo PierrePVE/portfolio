@@ -47,6 +47,15 @@ export const fr = {
     cardRole: 'Développeur Full-Stack',
   },
 
+  cv: {
+    // Hero button: downloads the CV in the current language.
+    download: 'Télécharger mon CV',
+    // Contact section: both versions, labelled by their language.
+    label: 'Mon CV :',
+    fr: 'Français',
+    en: 'Anglais',
+  },
+
   about: {
     eyebrow: 'À propos',
     // Rendered on two lines: `line1`, then `before` + gradient `highlight` + `after`.

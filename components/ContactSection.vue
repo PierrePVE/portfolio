@@ -62,6 +62,23 @@ const reveal = {
             </a>
           </div>
 
+          <!-- Both CV versions, whatever the page language (recruiters may need either). -->
+          <div class="mt-5 flex flex-wrap items-center justify-center gap-3 text-sm">
+            <span class="text-slate-500">{{ t.cv.label }}</span>
+            <a
+              v-for="l in (['fr', 'en'] as const)"
+              :key="l"
+              :href="cvUrl(l)"
+              download
+              class="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-4 py-1.5 text-slate-200 transition-colors hover:border-white/40 hover:bg-white/5"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              {{ t.cv[l] }}
+            </a>
+          </div>
+
           <div class="mt-10 grid gap-4 sm:grid-cols-2">
             <!-- External profiles (https) open in a new tab; mailto/tel links stay in place. -->
             <a

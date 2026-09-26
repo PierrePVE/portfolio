@@ -8,7 +8,10 @@ const config = useRuntimeConfig()
 const recurraUrl = config.public.recurraUrl
 
 // Translated copy (see locales/*.ts).
-const { t } = useLocale()
+const { t, locale } = useLocale()
+
+// The CV offered here follows the language the visitor is reading.
+const cvHref = computed(() => cvUrl(locale.value))
 
 // Racine de la section : sert de portée à gsap.context (sélecteurs limités à
 // cet élément, et nettoyage automatique via ctx.revert()).
@@ -89,6 +92,12 @@ onMounted(() => {
               {{ t.hero.primaryCta }}
             </a>
             <a href="#projects" class="btn-ghost">{{ t.hero.secondaryCta }}</a>
+            <a :href="cvHref" download class="btn-ghost">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              {{ t.cv.download }}
+            </a>
           </div>
 
           <!-- Stats -->

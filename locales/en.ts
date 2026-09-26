@@ -42,6 +42,13 @@ export const en: Messages = {
     cardRole: 'Full-Stack Developer',
   },
 
+  cv: {
+    download: 'Download my CV',
+    label: 'My CV:',
+    fr: 'French',
+    en: 'English',
+  },
+
   about: {
     eyebrow: 'About',
     title: { line1: 'I turn ideas', before: 'into ', highlight: 'living web products', after: '.' },
