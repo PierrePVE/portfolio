@@ -137,16 +137,34 @@ export const en: Messages = {
     eyebrow: 'Projects',
     title: { before: 'What I ', highlight: 'build', after: '' },
     openApp: 'Open the app',
+    sourceCode: 'View the code',
     recurra: {
       badge: 'Flagship project · live',
       description:
         'Personal subscription tracker: spending overview, breakdown by category and trends over time. Designed, built and deployed end to end.',
+      highlights: [
+        'Bank statement import (.xlsx / .csv): recurring expenses are detected automatically (same amount at a monthly or yearly interval). The file is parsed in memory and never stored.',
+        'Two isolated accounts: a personal one and a demo one reset on every login, so anyone can try it without breaking anything.',
+        'Totals and detection logic covered by Vitest tests; deployable with Docker (self-hosted) or on Vercel + Neon.',
+      ],
+      alt: {
+        main: 'Récurra dashboard: monthly and yearly totals, breakdown by category and cost per subscription',
+        secondary: 'Récurra subscription list with filters, categories and upcoming payments',
+      },
     },
     revu: {
       badge: 'SaaS · live',
       description:
         'Review-collection SaaS for local businesses: customers scan a QR code and rate their visit in seconds, no app required. Owners track their average rating and comment analysis, and get alerted when an issue keeps coming up.',
-      rating: '4.6',
+      highlights: [
+        'Keyword analysis of comments: when an issue keeps coming up ("waiting", "cold"…), the owner gets an email alert.',
+        'Built for serverless: rate limiting stored in PostgreSQL so it holds across instances, Vercel functions in the same region as the Neon database.',
+        'JWT authentication, bcrypt-hashed passwords, email password reset; the public demo is reset every day by a cron job.',
+      ],
+      alt: {
+        main: 'Revu owner dashboard: critical alert, average rating, trend and most mentioned words',
+        secondary: 'Revu review page on mobile, opened after scanning the QR code',
+      },
     },
     others: [
       {

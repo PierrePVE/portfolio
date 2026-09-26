@@ -146,17 +146,35 @@ export const fr = {
     eyebrow: 'Projets',
     title: { before: 'Ce que je ', highlight: 'construis', after: '' },
     openApp: "Ouvrir l'application",
+    sourceCode: 'Voir le code',
+    // `highlights` = what was solved (technical choices, hard parts), not features.
     recurra: {
       badge: 'Projet phare · en ligne',
       description:
         "Application de suivi d'abonnements personnels : synthèse des dépenses, répartition par catégorie et évolution dans le temps. Pensée, développée et déployée de bout en bout.",
+      highlights: [
+        "Import de relevé bancaire (.xlsx / .csv) : les dépenses récurrentes sont détectées automatiquement (même montant à intervalle mensuel ou annuel). Le fichier est analysé en mémoire, jamais stocké.",
+        'Deux comptes isolés : un compte personnel et un compte démo réinitialisé à chaque connexion, pour tester sans rien casser.',
+        'Calcul des totaux et détection couverts par des tests Vitest ; déployable en Docker (auto-hébergé) ou sur Vercel + Neon.',
+      ],
+      alt: {
+        main: 'Tableau de bord Récurra : totaux mensuel et annuel, répartition par catégorie et coût par abonnement',
+        secondary: 'Liste des abonnements Récurra avec filtres, catégories et prochains paiements',
+      },
     },
     revu: {
       badge: 'SaaS · en ligne',
       description:
         "SaaS de collecte d'avis pour les commerces de proximité : le client scanne un QR code et note sa visite en quelques secondes, sans application. Le commerçant suit la moyenne des notes, l'analyse des commentaires et reçoit une alerte quand un problème revient.",
-      // Decorative average rating, formatted with the locale's decimal separator.
-      rating: '4,6',
+      highlights: [
+        "Analyse des commentaires par mots-clés : quand un problème revient (« attente », « froid »…), le commerçant est alerté par email.",
+        "Pensé pour le serverless : limitation de débit stockée dans PostgreSQL pour tenir sur toutes les instances, fonctions Vercel dans la même région que la base Neon.",
+        'Authentification JWT, mots de passe hachés (bcrypt), réinitialisation par email ; la démo publique est remise à zéro chaque jour par une tâche cron.',
+      ],
+      alt: {
+        main: 'Tableau de bord commerçant Revu : alerte critique, note moyenne, évolution et mots les plus mentionnés',
+        secondary: "Page d'avis Revu sur mobile, ouverte après le scan du QR code",
+      },
     },
     others: [
       {
