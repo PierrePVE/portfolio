@@ -7,6 +7,10 @@ import { gsap } from 'gsap'
 const config = useRuntimeConfig()
 const recurraUrl = config.public.recurraUrl
 
+// Profile picture in public/images/. Prefixed with the base URL because plain
+// paths to public files are not rewritten and would break under /portfolio/.
+const avatarSrc = `${config.app.baseURL}images/github_avatar.png`
+
 // Translated copy (see locales/*.ts).
 const { t, locale } = useLocale()
 
@@ -125,9 +129,17 @@ onMounted(() => {
           <div data-hero="orbit" class="relative mx-auto aspect-[4/5] w-full max-w-sm">
             <div class="gradient-border glass h-full w-full p-1.5">
               <div class="relative h-full w-full overflow-hidden rounded-2xl bg-gradient-to-br from-ink-800 to-ink-950">
-                <!-- Monogramme géant -->
-                <div class="absolute inset-0 grid place-items-center">
-                  <span class="font-display text-[10rem] font-bold leading-none text-white/[0.04]">PV</span>
+                <!-- Profile picture (same illustration as the GitHub avatar).
+                     Slightly above centre so it clears the role text at the bottom.
+                     Source is 231px: displayed at 192px to stay sharp. -->
+                <div class="absolute inset-x-0 top-[18%] flex justify-center">
+                  <img
+                    :src="avatarSrc"
+                    :alt="t.hero.avatarAlt"
+                    width="192"
+                    height="192"
+                    class="h-48 w-48 rounded-full object-cover ring-2 ring-accent-500/40 ring-offset-4 ring-offset-ink-900"
+                  />
                 </div>
                 <!-- Contenu de la carte -->
                 <div class="absolute inset-x-0 bottom-0 p-6">

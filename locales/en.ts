@@ -40,6 +40,7 @@ export const en: Messages = {
       { value: '2027', label: 'internship search' },
     ],
     cardRole: 'Full-Stack Developer',
+    avatarAlt: 'Illustrated portrait of Pierre Van Elsuve',
   },
 
   cv: {

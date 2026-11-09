@@ -45,6 +45,7 @@ export const fr = {
       { value: '2027', label: 'recherche de stage' },
     ],
     cardRole: 'Développeur Full-Stack',
+    avatarAlt: 'Portrait illustré de Pierre Van Elsuve',
   },
 
   cv: {
