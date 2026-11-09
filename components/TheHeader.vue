@@ -42,7 +42,7 @@ function go(href: string) {
     <div class="mx-auto max-w-6xl px-5">
       <nav
         class="flex items-center justify-between rounded-full px-4 py-2.5 transition-all duration-500"
-        :class="scrolled ? 'glass' : 'border border-transparent'"
+        :class="scrolled ? 'glass backdrop-blur-xl' : 'border border-transparent'"
       >
         <a href="#" class="group flex items-center gap-2.5" @click.prevent="go('#')">
           <span
@@ -102,7 +102,7 @@ function go(href: string) {
         leave-active-class="transition duration-200 ease-in"
         leave-to-class="opacity-0 -translate-y-2"
       >
-        <div v-if="menuOpen" class="glass mt-2 overflow-hidden p-2 md:hidden">
+        <div v-if="menuOpen" class="glass mt-2 overflow-hidden p-2 backdrop-blur-xl md:hidden">
           <a
             v-for="l in t.header.links"
             :key="l.href"

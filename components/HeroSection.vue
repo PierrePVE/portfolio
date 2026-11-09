@@ -36,14 +36,25 @@ onMounted(() => {
   }, root.value!)
 
   // Parallaxe léger : la carte suit doucement la souris (effet de profondeur).
+  // quickTo builds one reusable tween per axis: calling gsap.to() on every
+  // mousemove (100+ events/s) allocated and killed a new tween each time.
+  const orbit = root.value!.querySelector('[data-hero="orbit"]')
+  const moveX = orbit ? gsap.quickTo(orbit, 'x', { duration: 0.8, ease: 'power2.out' }) : null
+  const moveY = orbit ? gsap.quickTo(orbit, 'y', { duration: 0.8, ease: 'power2.out' }) : null
+
+  /**
+   * Retargets the orbit card from the cursor position.
+   * @param e - Pointer event from window.
+   */
   const onMove = (e: MouseEvent) => {
     // Position souris normalisée dans [-1, 1] par rapport au centre de l'écran.
     const x = (e.clientX / window.innerWidth - 0.5) * 2
     const y = (e.clientY / window.innerHeight - 0.5) * 2
-    // Déplacement max de ±18 px, lissé par une transition GSAP.
-    gsap.to('[data-hero="orbit"]', { x: x * 18, y: y * 18, duration: 0.8, ease: 'power2.out' })
+    // Déplacement max de ±18 px.
+    moveX?.(x * 18)
+    moveY?.(y * 18)
   }
-  window.addEventListener('mousemove', onMove)
+  window.addEventListener('mousemove', onMove, { passive: true })
 
   // Nettoyage : retire l'écouteur et annule toutes les animations GSAP.
   onBeforeUnmount(() => {

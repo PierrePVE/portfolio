@@ -48,9 +48,14 @@
     );
   }
 
-  /* Carte verre dépoli */
+  /* Carte verre dépoli.
+     No backdrop-filter here on purpose: cards sit on top of the animated
+     aurora, so every blurred card had to be re-blurred on every frame (very
+     costly on large desktop screens). The background is already soft, so the
+     blur was visually negligible. Elements that overlap scrolling content
+     (the fixed header) add `backdrop-blur-xl` themselves. */
   .glass {
-    @apply rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl;
+    @apply rounded-2xl border border-white/10 bg-white/[0.03];
     box-shadow:
       0 1px 0 0 rgba(255, 255, 255, 0.05) inset,
       0 20px 60px -20px rgba(0, 0, 0, 0.6);
