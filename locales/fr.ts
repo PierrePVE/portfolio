@@ -67,7 +67,7 @@ export const fr = {
     facts: [
       { icon: 'cap', label: 'Formation', value: 'Cycle ingénieur ESEO — Logiciels & Données' },
       { icon: 'pin', label: 'Localisation', value: 'France · ouvert à la mobilité' },
-      { icon: 'globe', label: 'Langues', value: 'Français · Anglais (B1) · Espagnol (A2)' },
+      { icon: 'globe', label: 'Langues', value: 'Français · Anglais (B2) · Espagnol (A2)' },
       { icon: 'spark', label: 'Recherche', value: 'Stage — à partir de février 2027' },
     ],
   },

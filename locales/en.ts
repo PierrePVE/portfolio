@@ -59,7 +59,7 @@ export const en: Messages = {
     facts: [
       { icon: 'cap', label: 'Education', value: 'ESEO engineering degree — Software & Data' },
       { icon: 'pin', label: 'Location', value: 'France · open to relocation' },
-      { icon: 'globe', label: 'Languages', value: 'French · English (B1) · Spanish (A2)' },
+      { icon: 'globe', label: 'Languages', value: 'French · English (B2) · Spanish (A2)' },
       { icon: 'spark', label: 'Looking for', value: 'Internship — from February 2027' },
     ],
   },
