@@ -177,26 +177,38 @@ export const fr = {
         secondary: "Page d'avis Revu sur mobile, ouverte après le scan du QR code",
       },
     },
+    // Secondary work, shown as small cards. `kind` tells open source, team and
+    // personal work apart; `link` is optional (private repos have none).
     others: [
       {
-        name: 'Gestion de club de basket',
-        blurb: "Application web de gestion d'un club : effectifs, plannings et suivi.",
-        stack: ['HTML', 'CSS', 'JavaScript'],
+        kind: 'Open source',
+        name: 'Contribution à Nuxt Image',
+        blurb:
+          "Correction d'un bug du module officiel de Nuxt : certaines valeurs de sizes produisaient une largeur de 0 px dans le srcset. Deux tests ajoutés, en cours de revue.",
+        stack: ['TypeScript', 'Vitest'],
+        link: { href: 'https://github.com/nuxt/image/pull/2366', label: 'Voir la PR' },
       },
       {
-        name: 'Jeu de bataille navale',
-        blurb: 'Jeu en ligne de commande développé en C, logique de grille et IA simple.',
-        stack: ['Langage C'],
+        kind: 'Projet perso · en cours',
+        name: 'Rep',
+        blurb:
+          "Application web de suivi de musculation : programmes, saisie des séances, records personnels, statistiques et feed entre amis.",
+        stack: ['Nuxt 4', 'Drizzle', 'PostgreSQL', 'Zod', 'Vitest'],
+        link: { href: 'https://github.com/PierrePVE/rep', label: 'Voir le code' },
       },
       {
-        name: 'Jeu du dinosaure',
-        blurb: 'Recréation du jeu du T-Rex en Python, gestion des collisions et du score.',
-        stack: ['Python'],
+        kind: "Projet d'équipe",
+        name: 'Bati Recyclage',
+        blurb:
+          "Projet de fin d'études en équipe de 3 : site et back-office (authentification, gestion des comptes), conçus en respectant les critères d'éco-conception du RGESN.",
+        stack: ['Vue 3', 'FastAPI', 'PostgreSQL', 'Docker'],
       },
       {
-        name: 'Éthylomètre & Radar de recul',
-        blurb: 'Projets électroniques embarqués : mesure et signalisation temps réel.',
-        stack: ['STM32', 'Arduino', 'Analogique'],
+        kind: 'Projet perso',
+        name: 'Ce portfolio',
+        blurb: 'Site bilingue FR / EN sans librairie i18n, animations GSAP, déployé sur Vercel.',
+        stack: ['Nuxt 3', 'Tailwind CSS', 'GSAP'],
+        link: { href: 'https://github.com/PierrePVE/portfolio', label: 'Voir le code' },
       },
     ],
   },

@@ -180,21 +180,40 @@ function resetTilt(e: MouseEvent) {
           v-for="(p, i) in t.projects.others"
           :key="i"
           v-motion="{ initial: { opacity: 0, y: 40 }, visibleOnce: { opacity: 1, y: 0, transition: { duration: 600, delay: i * 90 } } }"
-          class="glass group relative overflow-hidden p-6 transition-[transform,border-color] duration-300 will-change-transform hover:border-accent-500/40"
+          class="glass group relative flex flex-col overflow-hidden p-6 transition-[transform,border-color] duration-300 will-change-transform hover:border-accent-500/40"
           style="transform-style: preserve-3d"
           @mousemove="onTilt"
           @mouseleave="resetTilt"
         >
           <div class="pointer-events-none absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-300 group-hover:opacity-100" :class="accents[i]" />
-          <div class="relative">
+          <!-- Fills the card height (grid rows stretch every card to the tallest
+               one) so the link below can be pinned to the bottom with mt-auto:
+               links line up across cards whatever the blurb length. -->
+          <div class="relative flex flex-1 flex-col">
             <span class="grid h-10 w-10 place-items-center rounded-xl bg-white/5 text-accent-300">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 9l-3 3 3 3M16 9l3 3-3 3M14 5l-4 14" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
-            <h3 class="mt-4 font-display text-base font-semibold text-white">{{ p.name }}</h3>
+            <!-- Kind badge: open source vs team vs personal work -->
+            <p class="mt-4 text-[11px] font-semibold uppercase tracking-wider text-accent-300">{{ p.kind }}</p>
+            <h3 class="mt-1 font-display text-base font-semibold text-white">{{ p.name }}</h3>
             <p class="mt-2 text-sm leading-relaxed text-slate-400">{{ p.blurb }}</p>
             <ul class="mt-4 flex flex-wrap gap-1.5">
               <li v-for="s in p.stack" :key="s" class="rounded-md bg-white/5 px-2 py-0.5 text-[11px] text-slate-300">{{ s }}</li>
             </ul>
+            <!-- Only public work gets a link; private repos have none.
+                 mt-auto pushes it to the card bottom; pt-4 keeps a minimum gap
+                 with the stack tags on the tallest card. -->
+            <div v-if="p.link" class="mt-auto pt-4">
+              <a
+                :href="p.link.href"
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center gap-1.5 text-sm font-medium text-accent-300 transition-colors hover:text-white"
+              >
+                {{ p.link.label }}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </a>
+            </div>
           </div>
         </article>
       </div>

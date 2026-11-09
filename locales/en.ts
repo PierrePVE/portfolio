@@ -169,24 +169,34 @@ export const en: Messages = {
     },
     others: [
       {
-        name: 'Basketball club manager',
-        blurb: 'Web app to run a club: rosters, schedules and tracking.',
-        stack: ['HTML', 'CSS', 'JavaScript'],
+        kind: 'Open source',
+        name: 'Nuxt Image contribution',
+        blurb:
+          "Fixed a bug in Nuxt's official image module: some sizes values produced a 0 px width in the srcset. Two tests added, currently in review.",
+        stack: ['TypeScript', 'Vitest'],
+        link: { href: 'https://github.com/nuxt/image/pull/2366', label: 'View the PR' },
       },
       {
-        name: 'Battleship game',
-        blurb: 'Command-line game written in C, with grid logic and a simple AI.',
-        stack: ['C'],
+        kind: 'Personal · in progress',
+        name: 'Rep',
+        blurb:
+          'Strength-training tracker web app: programmes, workout logging, personal records, stats and a feed with friends.',
+        stack: ['Nuxt 4', 'Drizzle', 'PostgreSQL', 'Zod', 'Vitest'],
+        link: { href: 'https://github.com/PierrePVE/rep', label: 'View the code' },
       },
       {
-        name: 'Dinosaur game',
-        blurb: 'Python remake of the T-Rex game, with collision handling and scoring.',
-        stack: ['Python'],
+        kind: 'Team project',
+        name: 'Bati Recyclage',
+        blurb:
+          'Final-year project in a team of 3: website and back office (authentication, account management), built to meet the RGESN eco-design criteria.',
+        stack: ['Vue 3', 'FastAPI', 'PostgreSQL', 'Docker'],
       },
       {
-        name: 'Breathalyser & Parking sensor',
-        blurb: 'Embedded electronics projects: real-time measurement and signalling.',
-        stack: ['STM32', 'Arduino', 'Analog'],
+        kind: 'Personal',
+        name: 'This portfolio',
+        blurb: 'Bilingual FR / EN site with no i18n library, GSAP animations, deployed on Vercel.',
+        stack: ['Nuxt 3', 'Tailwind CSS', 'GSAP'],
+        link: { href: 'https://github.com/PierrePVE/portfolio', label: 'View the code' },
       },
     ],
   },
